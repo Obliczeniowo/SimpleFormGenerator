@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<script src="formGenerator.js"></script>
+</head>
+
+<body>
+
+	<form name="FirstForm">
+	</form>
+
+	<button>Form send</button>
+
+	<script>
+
+		let parentElement = document.querySelector('form');
+
+		let question0 = new Question(0, "Podaj swój wiek:");
+		question0.buildQuestion(parentElement, 'wiek');
+		question0.addAnswer(new Answer('number', '', 'wiek'));
+
+		let question1 = new Question(1, "Czy masz szczęście?");
+		question1.buildQuestion(parentElement, 'firstOne');
+
+		question1.addAnswer(new Answer('radio', 'Tak mam i to dużo (podaj ile)'), new Answer('number', '', 'NumerCzegosTam'));
+		question1.addAnswer(new Answer('radio', 'Mam'));
+		question1.addAnswer(new Answer('radio', 'Nie mam'));
+
+		let question2 = new Question(2, "Czy coś tam coś tam?");
+		question2.buildQuestion(parentElement, 'secondOne');
+
+		question2.addAnswer(new Answer('radio', 'Tak'));
+		question2.addAnswer(new Answer('radio', 'Nie'));
+
+		let question3 = new Question(3, "Jakie kolory najbardziej lubisz?");
+		question3.buildQuestion(parentElement, 'anotherone');
+
+		question3.addAnswer(new Answer('checkbox', 'Pastelowe'));
+		question3.addAnswer(new Answer('checkbox', 'Kolorowe'));
+		question3.addAnswer(new Answer('checkbox', 'Marchewkowe'));
+
+		let buttonElement = document.querySelector('button');
+
+		buttonElement.addEventListener('click', () => {
+			let w = new FormData(parentElement);
+
+			for (var key of w.keys()) {
+				console.log('key: ' + key + ' = ', w.get(key));
+			}
+
+		})
+
+
+	</script>
+
+</body>
+
+</html>
